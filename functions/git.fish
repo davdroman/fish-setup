@@ -22,7 +22,7 @@ function gitlab_clone -a ssh_name repo_ssh_address repo_name
     gus $ssh_name
 end
 
-## Caches and untracked files
+## Caches & untracked files
 
 alias grm   'git rm -r --cached .'
 alias gcln  'git clean -fd'
@@ -43,7 +43,7 @@ function gsw
         if not test -d $status_diff
             rm $git_status
             mv $git_temp_status $git_status
-            clear and printf '\e[3J'
+            clear && printf '\e[3J'
             cat $git_status
         end
         sleep 2
@@ -64,7 +64,7 @@ function glw
         if not test -d $log_diff
             rm $git_log
             mv $git_temp_log $git_log
-            clear and printf '\e[3J'
+            clear && printf '\e[3J'
             cat $git_log
         end
         sleep 2
@@ -99,9 +99,9 @@ function gcop
 end
 
 alias mtr       'git checkout master'
-alias mtrp      'mtr and gp'
+alias mtrp      'mtr && gp'
 alias rel       'git checkout release'
-alias relp      'rel and gp'
+alias relp      'rel && gp'
 
 function gcof -a files -w 'git checkout --'
 	git checkout -- $files
@@ -188,7 +188,7 @@ function gdaw
 		    set diff_diff (cmp $git_diff $git_tmp_diff 2>&1)
 		    if not test -d $diff_diff
 		        mv -f $git_tmp_diff $git_diff
-		        clear and printf '\e[3J'
+		        clear && printf '\e[3J'
 		        if test -s $git_diff
 		    		git diff --color --indent-heuristic HEAD ':(exclude)*.pbxproj' | diff-so-fancy
 			    else
@@ -197,7 +197,7 @@ function gdaw
 	        end
 	    else
 	    	mv -f $git_tmp_diff $git_diff
-	    	clear and printf '\e[3J'
+	    	clear && printf '\e[3J'
 	    	if test -s $git_diff
 	    		git diff --color --indent-heuristic HEAD ':(exclude)*.pbxproj' | diff-so-fancy
 		    else

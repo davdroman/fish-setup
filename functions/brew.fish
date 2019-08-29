@@ -4,7 +4,7 @@ function bump_version
 	set cli_path Sources/CLI/CommandLineTool.swift
 	sed -i '' "s/static let version = .*/static let version = \"$bump_version\"/g" $cli_path
 
-	# Commit and push
+	# Commit && push
 	git add $cli_path
 	git commit -m "Bump version number ($bump_version)"
 	git tag $bump_version
@@ -12,7 +12,7 @@ function bump_version
 end
 
 function update_formula
-	# Bump version number and revision commit
+	# Bump version number && revision commit
 	set folder_name (basename "$PWD" | tr '[:upper:]' '[:lower:]')
 	set tap_path ../tap
 	set recipe_path $tap_path/Formula/$folder_name.rb
@@ -24,7 +24,7 @@ function update_formula
 	sed -i '' "s/version .*/version \"$tag_name\"/g" $recipe_path
 	sed -i '' "s/sha256 .*/sha256 \"$checksum\"/g" $recipe_path
 
-	# Commit and push changes
+	# Commit && push changes
 	cd $tap_path
 	git add .
 	git commit -m "Bump version number ($tag_name)"
