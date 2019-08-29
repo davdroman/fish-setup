@@ -1,4 +1,5 @@
 alias ..		'cd ..'
+abbr -a -- -    'cd -'
 alias t			'tree'
 alias lsa		'ls -a'
 alias lsl		'ls -l'
