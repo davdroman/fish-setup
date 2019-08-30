@@ -162,6 +162,8 @@ alias gda    'git diff --color --indent-heuristic HEAD | diff-so-fancy'
 alias gsh    'git show'
 
 function gdaw
+	set git_diff /dev/null
+
     while true
         set git_tmp_diff (git --no-optional-locks --no-pager diff HEAD)
         if test "$git_diff" != "$git_tmp_diff"
