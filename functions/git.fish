@@ -32,19 +32,12 @@ alias gcln  'git clean -fd'
 alias gs    'git status'
 
 function gsw
-    set git_status .git/status
-    set git_temp_status .git/tmp_status
-
-    rm -rf $git_status
-
     while true
-        script -q $git_temp_status git --no-optional-locks status > /dev/null
-        set status_diff (cmp $git_status $git_temp_status 2>&1)
-        if not test -d $status_diff
-            rm $git_status
-            mv $git_temp_status $git_status
-            clear && printf '\e[3J'
-            cat $git_status
+        set git_tmp_diff (git --no-optional-locks status)
+        if test "$git_diff" != "$git_tmp_diff"
+	    	set git_diff $git_tmp_diff
+	        clear && printf '\e[3J'
+	        git --no-optional-locks status
         end
         sleep 2
     end
@@ -53,19 +46,12 @@ end
 alias gl    'git log'
 
 function glw
-    set git_log .git/log
-    set git_temp_log .git/tmp_log
-
-    rm -rf $git_log
-
     while true
-        script -q $git_temp_log git --no-optional-locks --no-pager log --abbrev-commit --pretty=oneline -20 > /dev/null
-        set log_diff (cmp $git_log $git_temp_log 2>&1)
-        if not test -d $log_diff
-            rm $git_log
-            mv $git_temp_log $git_log
-            clear && printf '\e[3J'
-            cat $git_log
+        set git_tmp_diff (git --no-optional-locks --no-pager log --abbrev-commit --pretty=oneline -20)
+        if test "$git_diff" != "$git_tmp_diff"
+	    	set git_diff $git_tmp_diff
+	        clear && printf '\e[3J'
+	        git --no-optional-locks --no-pager log --abbrev-commit --pretty=oneline -20
         end
         sleep 2
     end
