@@ -176,34 +176,17 @@ alias gda    'git diff --color --indent-heuristic HEAD | diff-so-fancy'
 alias gsh    'git show'
 
 function gdaw
-    set git_diff .git/diff
-    set git_tmp_diff .git/tmp_diff
-
-    rm $git_diff
-    rm $git_tmp_diff
-
     while true
-        script -q $git_tmp_diff git --no-optional-locks --no-pager diff HEAD > /dev/null
-        if test -e $git_diff
-		    set diff_diff (cmp $git_diff $git_tmp_diff 2>&1)
-		    if not test -d $diff_diff
-		        mv -f $git_tmp_diff $git_diff
-		        clear && printf '\e[3J'
-		        if test -s $git_diff
-		    		git diff --color --indent-heuristic HEAD ':(exclude)*.pbxproj' | diff-so-fancy
-			    else
-			    	cat (random choice $FISH_CONFIG_PATH/resources/ascii/*)
-			    end
-	        end
-	    else
-	    	mv -f $git_tmp_diff $git_diff
-	    	clear && printf '\e[3J'
-	    	if test -s $git_diff
-	    		git diff --color --indent-heuristic HEAD ':(exclude)*.pbxproj' | diff-so-fancy
+        set git_tmp_diff (git --no-optional-locks --no-pager diff HEAD)
+        if test "$git_diff" != "$git_tmp_diff"
+	    	set git_diff $git_tmp_diff
+	        clear && printf '\e[3J'
+	        if test -n "$git_diff"
+	        	git diff --color --indent-heuristic HEAD ':(exclude)*.pbxproj' | diff-so-fancy
 		    else
 		    	cat (random choice $FISH_CONFIG_PATH/resources/ascii/*)
 		    end
-		end
+        end
         sleep 2
     end
 end
