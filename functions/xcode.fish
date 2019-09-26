@@ -19,7 +19,7 @@ function ctl
     end
 end
 
-function xclean
+function xcclean
     set folder_prefix $argv
     if not test -d $folder_prefix
         rm -rf ~/Library/Developer/Xcode/DerivedData/$argv* >/dev/null 2>/dev/null
@@ -36,6 +36,10 @@ function xcselect
     end
 end
 
-function xcrecordsim
+function xcsimrecord
     xcrun simctl io booted recordVideo ~/Downloads/sim_recording
+end
+
+function xcsimopenurl
+	xcrun simctl openurl booted $argv
 end
