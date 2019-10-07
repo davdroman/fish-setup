@@ -152,6 +152,7 @@ alias gf     'git fetch origin'
 function gp
     gbt
     git pull origin --tags --rebase
+    gbcln
 end
 
 ## Diffing
