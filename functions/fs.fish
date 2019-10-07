@@ -6,6 +6,8 @@ alias lsl		'ls -l'
 alias lsla		'ls -la'
 alias rmrf		'rm -rf'
 
+alias icloud	'cd /Users/$USER/Library/Mobile\ Documents/com~apple~CloudDocs'
+
 function mkcd
     mkdir $argv
     cd $argv
