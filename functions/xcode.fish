@@ -43,3 +43,7 @@ end
 function xcsimopenurl
 	xcrun simctl openurl booted $argv
 end
+
+function xcsimtidystatusbar -a device_name
+	xcrun simctl status_bar "$device_name" override --time 9:41 --dataNetwork wifi --wifiMode active --wifiBars 3 --cellularMode active --cellularBars 4 --batteryState charged --batteryLevel 100
+end
