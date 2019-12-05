@@ -37,7 +37,7 @@ function xcselect
 end
 
 function xcsimrecord
-    xcrun simctl io booted recordVideo ~/Downloads/sim_recording
+    xcrun simctl io booted recordVideo ~/Downloads/sim_recording.mov -f
 end
 
 function xcsimopenurl
