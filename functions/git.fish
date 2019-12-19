@@ -1,5 +1,12 @@
 # Git
 
+## Init
+
+function gi
+    curl -sL "https://www.gitignore.io/api/$argv" > .gitignore
+    cat .gitignore
+end
+
 ## Clone
 
 function github_clone -a ssh_name repo_shorthand repo_name
