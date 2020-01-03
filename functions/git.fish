@@ -54,11 +54,11 @@ alias gl    'git log'
 
 function glw
     while true
-        set git_tmp_diff (git --no-optional-locks --no-pager log --abbrev-commit --pretty=oneline -20)
+        set git_tmp_diff (git --no-optional-locks --no-pager log --abbrev-commit --pretty=oneline -10)
         if test "$git_diff" != "$git_tmp_diff"
 	    	set git_diff $git_tmp_diff
 	        clear && printf '\e[3J'
-	        git --no-optional-locks --no-pager log --abbrev-commit --pretty=oneline -20
+	        git --no-optional-locks --no-pager log --abbrev-commit --pretty=oneline -10
         end
         sleep 1
     end
@@ -192,7 +192,7 @@ end
 function ga -a files -w 'git add'
     switch (count $files)
     case 0
-        git gui
+        git gui 2> /dev/null
     case '*'
         git add $files
     end
