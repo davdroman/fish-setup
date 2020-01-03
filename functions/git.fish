@@ -9,24 +9,17 @@ end
 
 ## Clone
 
-function github_clone -a ssh_name repo_shorthand repo_name
+function gcl -a ssh_name repo_ssh_address repo_name
     set ssh_path /Users/$USER/.ssh/config/id_rsa_$ssh_name
-
-    if test -d $repo_name
-        set repo_name (echo $repo_shorthand | cut -d '/' -f2)
-    end
-
-    ssh-agent bash -c "ssh-add $ssh_path; git clone git@github.com:$repo_shorthand.git $repo_name"
-    cd $repo_name
-    gus $ssh_name
-end
-
-function gitlab_clone -a ssh_name repo_ssh_address repo_name
-    set ssh_path /Users/$USER/.ssh/config/id_rsa_$ssh_name
+    test -n "$repo_name"; or set repo_name (basename $repo_ssh_address .git)
 
     ssh-agent bash -c "ssh-add $ssh_path; git clone $repo_ssh_address $repo_name"
     cd $repo_name
     gus $ssh_name
+end
+
+function ghcl -a ssh_name repo_shorthand repo_name
+    gcl $ssh_name git@github.com:$repo_shorthand.git $repo_name
 end
 
 ## Caches & untracked files
