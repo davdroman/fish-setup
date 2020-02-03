@@ -14,9 +14,9 @@ function ef
     end
 end
 
-function cdf
-	cd $FISH_CONFIG_PATH
-end
+alias cdf   "cd '$FISH_CONFIG_PATH'"
+alias tff   "open -a Finder '$FISH_CONFIG_PATH'"
+alias sublf "subl '$FISH_CONFIG_PATH'"
 
 function fish_greeting
 
