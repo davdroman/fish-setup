@@ -1,12 +1,16 @@
-alias ..		'cd ..'
-abbr -a -- -    'cd -'
-alias t			'tree'
-alias lsa		'ls -a'
-alias lsl		'ls -l'
-alias lsla		'ls -la'
-alias rmrf		'rm -rf'
+set ICLOUD_DRIVE_PATH "/Users/$USER/Library/Mobile\ Documents/com~apple~CloudDocs"
 
-alias icloud	'cd /Users/$USER/Library/Mobile\ Documents/com~apple~CloudDocs'
+alias ..         'cd ..'
+abbr -a -- -     'cd -'
+alias t          'tree'
+alias lsa        'ls -a'
+alias lsl        'ls -l'
+alias lsla       'ls -la'
+alias rmrf       'rm -rf'
+
+alias cdicloud	 "cd $ICLOUD_DRIVE_PATH"
+alias tficloud   "open -a Finder $ICLOUD_DRIVE_PATH"
+alias sublicloud "subl $ICLOUD_DRIVE_PATH"
 
 function mkcd
     mkdir $argv
