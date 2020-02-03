@@ -39,7 +39,7 @@ function gsw
 	        clear && printf '\e[3J'
 	        git --no-optional-locks status
         end
-        sleep 1
+        sleep 1.5
     end
 end
 
@@ -53,7 +53,7 @@ function glw
 	        clear && printf '\e[3J'
 	        git --no-optional-locks --no-pager log --abbrev-commit --pretty=oneline -10
         end
-        sleep 1
+        sleep 3
     end
 end
 
@@ -64,8 +64,7 @@ alias gba      'gb -a'
 alias gbm      'git branch -m'
 
 function gbcln
-    # git for-each-ref --format='%(refname:short) %(upstream)' refs/heads/ | awk '$2 !~/^refs\/remotes/' | xargs git branch -D
-    git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -d
+    git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D
 end
 
 function gco -a branch_search_term
@@ -160,7 +159,10 @@ end
 alias gd     'git diff --color --indent-heuristic | diff-so-fancy'
 alias gds    'git diff --staged --color --indent-heuristic | diff-so-fancy'
 alias gda    'git diff --color --indent-heuristic HEAD | diff-so-fancy'
-alias gsh    'git show'
+
+function gsh
+    git show $argv | diff-so-fancy
+end
 
 function gdaw
 	set git_diff /dev/null
@@ -171,12 +173,12 @@ function gdaw
 	    	set git_diff $git_tmp_diff
 	        clear && printf '\e[3J'
 	        if test -n "$git_diff"
-	        	git diff --color --indent-heuristic HEAD ':(exclude)*.pbxproj' | diff-so-fancy
+	        	git diff --color --indent-heuristic HEAD | diff-so-fancy # ':(exclude)*.pbxproj'
 		    else
 		    	cat (random choice $FISH_CONFIG_PATH/resources/ascii/*)
 		    end
         end
-        sleep 1
+        sleep 1.5
     end
 end
 
@@ -185,7 +187,7 @@ end
 function ga -a files -w 'git add'
     switch (count $files)
     case 0
-        git gui 2> /dev/null
+        git cola
     case '*'
         git add $files
     end
