@@ -11,8 +11,8 @@ function spmup
 	swift package update
 end
 
-function spmgen
-	swift package generate-xcodeproj
+function spmedit
+	open Package.swift
 end
 
 function spmdebug
