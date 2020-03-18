@@ -5,7 +5,7 @@ end
 
 function gua -d 'Adds user key to ssh and attempts GitHub authentication' -a username
     set ssh_path /Users/$USER/.ssh/config/id_rsa_$username
-    ssh-add $ssh_path
+    ssh-add -K $ssh_path
     ssh -i $ssh_path -T git@github.com
 end
 
